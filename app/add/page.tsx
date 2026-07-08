@@ -25,7 +25,7 @@ export default function Find() {
 
   const handleLogin = async (e: FormData) => {
     const { error } = await supabase.auth.signInWithPassword({
-      email: "nategries1@gmail.com",
+      email: process.env.NEXT_PUBLIC_AUTH_EMAIL ?? "",
       password: e.get("password") as string,
     });
     if (error) setPasswordError(error.message);
