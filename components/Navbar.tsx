@@ -28,13 +28,13 @@ export default function Navbar() {
   if (!loggedIn) return null;
 
   return (
-    <nav className="flex items-center justify-between px-8 py-4 border-b">
-      <p className="font-bold">Recipes</p>
+    <nav className="flex items-center justify-between px-5 sm:px-8 py-4 border-b h-19 sm:h-21">
+      <p className="text-xl sm:text-[32px]">Recipe Finder</p>
       <button
         onClick={handleLogout}
-        className="border-styles px-4 py-1 text-sm"
+        className="border-styles px-5 sm:px-7.5 py-2.5 text-[16px] sm:text-xl"
       >
-        Logout
+        Log out
       </button>
     </nav>
   );
