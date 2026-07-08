@@ -122,8 +122,8 @@ export default function Find() {
 
   const views: Record<View, React.ReactNode> = {
     loggedOut: (
-      <div className="flex-1 flex flex-col justify-center gap-y-4">
-        <h1 className="text-3xl">
+      <div className="flex-1 flex flex-col justify-center gap-y-4 p-4 text-center">
+        <h1 className="text-2xl md:text-3xl">
           Log in before adding new recipes or sections.
         </h1>
         <form
