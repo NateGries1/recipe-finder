@@ -122,7 +122,7 @@ export default function Find() {
 
   const views: Record<View, React.ReactNode> = {
     loggedOut: (
-      <div className="flex-1 flex flex-col justify-center gap-y-4 p-4 text-center">
+      <div className="w-full flex-1 px-4 flex flex-col justify-center gap-y-4 p-4 text-center">
         <h1 className="text-2xl md:text-3xl">
           Log in before adding new recipes or sections.
         </h1>
@@ -134,7 +134,7 @@ export default function Find() {
           <input
             type="password"
             name="password"
-            className="text-2xl border-styles caret-gray-400 px-3"
+            className="w-[80vw] max-w-[300px] text-2xl border-styles caret-gray-400 px-3"
           />
           {passwordError && (
             <p className="text-red-500 text-xl">{passwordError}</p>
@@ -173,7 +173,7 @@ export default function Find() {
         </h2>
         <form
           action={handleAddRecipe}
-          className="mt-11 flex flex-col rounded-2xl w-[clamp(350px,calc(350px+650*((100vw-393px)/1047)),1000px)] px-[clamp(24px,calc(24px+32*((100vw-393px)/1047)),56px)] light pl-8 py-7 sm:py-9 text-[16px] sm:text-xl"
+          className="mt-11 flex flex-col rounded-2xl w-[clamp(350px,calc(350px+650*((100vw-393px)/1047)),1000px)] pr-[clamp(24px,calc(24px+32*((100vw-393px)/1047)),56px)] light pl-8 py-7 sm:py-9 text-[16px] sm:text-xl"
         >
           {/* Recipe Name */}
           <div className="flex gap-x-3 lg:gap-x-4">
@@ -187,7 +187,7 @@ export default function Find() {
                 type="text"
                 name="name"
                 placeholder="Enter recipe name"
-                className="px-4 rounded-[10px] border border-(--dark-color) font-regular h-10 lg:h-12.5"
+                className="rounded-[10px] border border-(--dark-color) font-regular h-10 lg:h-12.5 px-3 w-full bg-transparent"
               />
             </div>
           </div>
@@ -267,10 +267,10 @@ export default function Find() {
         </h2>
         <form
           action={handleAddSection}
-          className="mt-11 flex flex-col rounded-2xl w-[clamp(350px,calc(350px+650*((100vw-393px)/1047)),1000px)] px-[clamp(24px,calc(24px+32*((100vw-393px)/1047)),56px)] light pl-8 py-7 sm:py-9 text-[16px] sm:text-xl"
+          className="mt-11 flex flex-col rounded-2xl w-[clamp(350px,calc(350px+650*((100vw-393px)/1047)),1000px)] pr-[clamp(24px,calc(24px+32*((100vw-393px)/1047)),56px)] light pl-8 py-7 sm:py-9 text-[16px] sm:text-xl"
         >
           <div className="flex gap-x-3 lg:gap-x-4">
-            <Book
+            <Folder
               className="w-10 h-10 md:w-12.5 md:h-12.5 rounded-full border-[1.5px] lg:border-2 border-(--dark-color)"
               border={true}
             />
@@ -280,7 +280,7 @@ export default function Find() {
                 type="text"
                 name="name"
                 placeholder="Enter section name"
-                className="px-4 rounded-[10px] border border-(--dark-color) font-regular h-10 lg:h-12.5"
+                className="rounded-[10px] border border-(--dark-color) font-regular h-10 lg:h-12.5 px-3 w-full bg-transparent"
               />
             </div>
           </div>
