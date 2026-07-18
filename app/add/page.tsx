@@ -74,6 +74,7 @@ export default function Find() {
         name: e.get("name"),
         section_id: section.id,
         page_number: section.num_pages,
+        total_cooking_time: 0,
       })
       .select()
       .single();

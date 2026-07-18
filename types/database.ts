@@ -14,39 +14,149 @@ export type Database = {
   };
   public: {
     Tables: {
-      Recipes: {
+      cuisines: {
         Row: {
           created_at: string;
           id: number;
           name: string;
-          page_number: number | null;
-          section_id: number | null;
         };
         Insert: {
           created_at?: string;
           id?: number;
-          name?: string;
-          page_number?: number | null;
-          section_id?: number | null;
+          name: string;
         };
         Update: {
           created_at?: string;
           id?: number;
           name?: string;
-          page_number?: number | null;
-          section_id?: number | null;
+        };
+        Relationships: [];
+      };
+      difficulty: {
+        Row: {
+          created_at: string;
+          id: number;
+          name: string;
+        };
+        Insert: {
+          created_at?: string;
+          id?: number;
+          name: string;
+        };
+        Update: {
+          created_at?: string;
+          id?: number;
+          name?: string;
+        };
+        Relationships: [];
+      };
+      ingredients: {
+        Row: {
+          created_at: string;
+          id: number;
+          name: string;
+        };
+        Insert: {
+          created_at?: string;
+          id?: number;
+          name: string;
+        };
+        Update: {
+          created_at?: string;
+          id?: number;
+          name?: string;
+        };
+        Relationships: [];
+      };
+      recipe_ingredient: {
+        Row: {
+          created_at: string;
+          ingredient: number;
+          recipe: number;
+        };
+        Insert: {
+          created_at?: string;
+          ingredient: number;
+          recipe: number;
+        };
+        Update: {
+          created_at?: string;
+          ingredient?: number;
+          recipe?: number;
         };
         Relationships: [
           {
-            foreignKeyName: "Recipes_section_id_fkey";
-            columns: ["section_id"];
+            foreignKeyName: "recipe_ingredient_ingredient_fkey";
+            columns: ["ingredient"];
             isOneToOne: false;
-            referencedRelation: "Sections";
+            referencedRelation: "ingredients";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "recipe_ingredient_recipe_fkey1";
+            columns: ["recipe"];
+            isOneToOne: false;
+            referencedRelation: "recipes";
             referencedColumns: ["id"];
           },
         ];
       };
-      Sections: {
+      recipes: {
+        Row: {
+          created_at: string;
+          cuisine: number | null;
+          difficulty: number | null;
+          id: number;
+          name: string;
+          page_number: number | null;
+          section_id: number | null;
+          total_cooking_time: number;
+        };
+        Insert: {
+          created_at?: string;
+          cuisine?: number | null;
+          difficulty?: number | null;
+          id?: number;
+          name?: string;
+          page_number?: number | null;
+          section_id?: number | null;
+          total_cooking_time: number;
+        };
+        Update: {
+          created_at?: string;
+          cuisine?: number | null;
+          difficulty?: number | null;
+          id?: number;
+          name?: string;
+          page_number?: number | null;
+          section_id?: number | null;
+          total_cooking_time?: number;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "Recipes_cuisine_fkey";
+            columns: ["cuisine"];
+            isOneToOne: false;
+            referencedRelation: "cuisines";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "recipes_difficulty_fkey";
+            columns: ["difficulty"];
+            isOneToOne: false;
+            referencedRelation: "difficulty";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "Recipes_section_id_fkey";
+            columns: ["section_id"];
+            isOneToOne: false;
+            referencedRelation: "sections";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      sections: {
         Row: {
           created_at: string;
           id: number;
@@ -209,5 +319,10 @@ export const Constants = {
   },
 } as const;
 
-export type Recipe = Database["public"]["Tables"]["Recipes"]["Row"];
-export type Section = Database["public"]["Tables"]["Sections"]["Row"];
+// Row types
+export type Cuisine = Tables<"cuisines">;
+export type Difficulty = Tables<"difficulty">;
+export type Ingredient = Tables<"ingredients">;
+export type Recipe = Tables<"recipes">;
+export type Section = Tables<"sections">;
+export type RecipeIngredient = Tables<"recipe_ingredient">;
