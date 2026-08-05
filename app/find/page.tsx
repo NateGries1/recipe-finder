@@ -33,16 +33,13 @@ export default function Find() {
   const recipeIngredientMap = useMemo(() => {
     const map = new Map<number, Set<number>>();
     for (const row of recipeIngredientRows) {
-      if (!map.has(row.recipe)) map.set(row.recipe, new Set());
-      map.get(row.recipe)!.add(row.ingredient);
+      if (!map.has(row.recipe_id)) map.set(row.recipe_id, new Set());
+      map.get(row.recipe_id)!.add(row.ingredient_id);
     }
     return map;
   }, [recipeIngredientRows]);
 
   const [selectedCuisine, setSelectedCuisine] = useState<Cuisine | null>(null);
-  // NOTE: Recipes has no `difficulty` column and there's no recipe_difficulty
-  // junction table, so this filter has nothing to check against yet — it's
-  // wired up in the UI but won't affect results until that relation exists.
   const [selectedDifficulty, setSelectedDifficulty] =
     useState<Difficulty | null>(null);
   const [ingredientQuery, setIngredientQuery] = useState<string>("");
@@ -121,11 +118,13 @@ export default function Find() {
       const matchesQuery = r.name?.toLowerCase().includes(query.toLowerCase());
       if (!matchesQuery) return false;
 
-      if (selectedCuisine && r.cuisine !== selectedCuisine.id) {
+      if (selectedCuisine && r.cuisine_id !== selectedCuisine.id) {
         return false;
       }
 
-      // Difficulty filter intentionally not applied yet — see note above.
+      if (selectedDifficulty && r.difficulty_id !== selectedDifficulty.id) {
+        return false;
+      }
 
       if (selectedIngredients.length > 0) {
         const ingredientSet = recipeIngredientMap.get(r.id);
@@ -145,6 +144,7 @@ export default function Find() {
     recipes,
     query,
     selectedCuisine,
+    selectedDifficulty,
     selectedIngredients,
     maxTime,
     recipeIngredientMap,
@@ -189,7 +189,7 @@ export default function Find() {
           </div>
 
           <div className="flex flex-col flex-1">
-            <p>Max Cooking Time (min)</p>
+            <p>Max Cooking Time (mins)</p>
             <input
               type="number"
               min={0}

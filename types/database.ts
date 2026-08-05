@@ -71,30 +71,30 @@ export type Database = {
       recipe_ingredient: {
         Row: {
           created_at: string;
-          ingredient: number;
-          recipe: number;
+          ingredient_id: number;
+          recipe_id: number;
         };
         Insert: {
           created_at?: string;
-          ingredient: number;
-          recipe: number;
+          ingredient_id: number;
+          recipe_id: number;
         };
         Update: {
           created_at?: string;
-          ingredient?: number;
-          recipe?: number;
+          ingredient_id?: number;
+          recipe_id?: number;
         };
         Relationships: [
           {
             foreignKeyName: "recipe_ingredient_ingredient_fkey";
-            columns: ["ingredient"];
+            columns: ["ingredient_id"];
             isOneToOne: false;
             referencedRelation: "ingredients";
             referencedColumns: ["id"];
           },
           {
             foreignKeyName: "recipe_ingredient_recipe_fkey1";
-            columns: ["recipe"];
+            columns: ["recipe_id"];
             isOneToOne: false;
             referencedRelation: "recipes";
             referencedColumns: ["id"];
@@ -104,8 +104,8 @@ export type Database = {
       recipes: {
         Row: {
           created_at: string;
-          cuisine: number | null;
-          difficulty: number | null;
+          cuisine_id: number | null;
+          difficulty_id: number | null;
           id: number;
           name: string;
           page_number: number | null;
@@ -114,8 +114,8 @@ export type Database = {
         };
         Insert: {
           created_at?: string;
-          cuisine?: number | null;
-          difficulty?: number | null;
+          cuisine_id?: number | null;
+          difficulty_id?: number | null;
           id?: number;
           name?: string;
           page_number?: number | null;
@@ -124,8 +124,8 @@ export type Database = {
         };
         Update: {
           created_at?: string;
-          cuisine?: number | null;
-          difficulty?: number | null;
+          cuisine_id?: number | null;
+          difficulty_id?: number | null;
           id?: number;
           name?: string;
           page_number?: number | null;
@@ -135,14 +135,14 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "Recipes_cuisine_fkey";
-            columns: ["cuisine"];
+            columns: ["cuisine_id"];
             isOneToOne: false;
             referencedRelation: "cuisines";
             referencedColumns: ["id"];
           },
           {
             foreignKeyName: "recipes_difficulty_fkey";
-            columns: ["difficulty"];
+            columns: ["difficulty_id"];
             isOneToOne: false;
             referencedRelation: "difficulty";
             referencedColumns: ["id"];

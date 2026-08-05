@@ -19,7 +19,7 @@ export default function SelectButton<T extends Option>({
   onSelect,
   onClear,
   placeholder = "Select...",
-  clearLabel = "Any",
+  clearLabel,
 }: SelectButtonProps<T>) {
   const [show, setShow] = useState(false);
 

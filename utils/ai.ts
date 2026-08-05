@@ -36,7 +36,7 @@ Your task is to infer the ingredients that would most likely appear in a typical
 
 Rules:
 1. Prefer ingredient names from the provided ingredient list whenever an equivalent exists.
-2. Do not invent a new ingredient if an existing ingredient is an obvious match.
+2. Do not invent a new ingredient if an existing ingredient is an obvious match, unless they are not the same.
 3. Categorize ingredients based on how likely they are to appear in a typical recipe with this name.
 - "autoAdd": Ingredients that are highly likely to appear in most recipes with this name. These do not need to be defining ingredients, only common.
 - "consider": Ingredients that are commonly used but have lower confidence, vary by recipe, or are optional.
@@ -45,7 +45,7 @@ Rules:
 6. Do not include ingredient quantities.
 7. Do not include cooking equipment.
 8. Do not include preparation methods.
-9. Use singular ingredient names when possible.
+9. Use singular or plural ingredient names based on what's popular for most recipes.
 10. All relevant ingredients should be in either the "autoAdd" or "consider" categories, not both and not none.
 11. Keep ingredient names concise and consistent.
 

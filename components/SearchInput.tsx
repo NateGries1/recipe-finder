@@ -6,12 +6,15 @@ type Option = { id: number; name: string };
 
 interface SearchInputProps<T extends Option> {
   query: string;
-  onQueryChange: (value: string) => void;
   options: T[];
-  onSelect: (option: T) => void;
   placeholder?: string;
   emptyMessage?: string;
   closeOnSelect?: boolean;
+  addCurrentLabel?: string;
+  onQueryChange: (value: string) => void;
+  onSelect: (option: T) => void;
+  handleEnter?: (value: string) => void;
+  handleSelectCurrent?: (value: string) => void;
 }
 
 export default function SearchInput<T extends Option>({
@@ -22,6 +25,9 @@ export default function SearchInput<T extends Option>({
   placeholder,
   emptyMessage,
   closeOnSelect = true,
+  handleEnter,
+  addCurrentLabel,
+  handleSelectCurrent,
 }: SearchInputProps<T>) {
   const [show, setShow] = useState(false);
 
@@ -33,6 +39,13 @@ export default function SearchInput<T extends Option>({
         onChange={(e) => {
           onQueryChange(e.target.value);
           setShow(true);
+        }}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" && handleEnter) {
+            e.preventDefault();
+            if (closeOnSelect) setShow(false);
+            handleEnter(query);
+          }
         }}
         onFocus={() => setShow(true)}
         onBlur={() => setTimeout(() => setShow(false), 150)}
@@ -47,6 +60,9 @@ export default function SearchInput<T extends Option>({
             if (closeOnSelect) setShow(false);
           }}
           emptyMessage={emptyMessage}
+          current={query}
+          addCurrentLabel={addCurrentLabel}
+          handleSelectCurrent={handleSelectCurrent ?? onQueryChange}
         />
       )}
     </div>
